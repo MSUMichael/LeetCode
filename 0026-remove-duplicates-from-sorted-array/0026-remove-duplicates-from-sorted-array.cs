@@ -1,20 +1,28 @@
 public class Solution {
     public int RemoveDuplicates(int[] nums) {
-        int replacement = nums[nums.Length-1]+1;
-        int progress_max = nums[0];
-        int distinct_ints = 1;
-        if (nums.Length != 1){
-            for (int i = 1; i < nums.Length; i++){
-                if (nums[i] > progress_max){
-                    distinct_ints += 1;
-                    progress_max = nums[i];
-                }
-                else if (nums[i] == progress_max) {
-                    nums[i] = replacement;
+        
+        if (nums.Length>0){
+            int unique_elements = 1;
+            int[] new_nums;
+            new_nums = new int[nums.Length];
+
+            new_nums[0] = nums[0];
+            
+            for (int i = 0; i < nums.Length-1; i++){
+                if (nums[i] != nums[i+1]){
+                    new_nums[unique_elements] = nums[i+1];
+                    unique_elements += 1;
                 }
             }
-            Array.Sort(nums);
+            for (int i = 0; i < new_nums.Length; i++){
+                nums[i] = new_nums[i];
+            }
+            
+            return unique_elements;
         }
-        return distinct_ints;
+        else {
+            return 0;
+        }
+        
     }
 }
